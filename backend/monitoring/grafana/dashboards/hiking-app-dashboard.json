@@ -1,0 +1,165 @@
+{
+  "id": null,
+  "uid": "hiking-app-ui",
+  "title": "Hiking App Dashboard",
+  "tags": [
+    "spring boot",
+    "prometheus",
+    "hiking"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "HTTP 5xx Error Rate (%)",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "expr": "100 * (sum(rate(http_server_requests_seconds_count{status=~\"5..\"}[5m])) / sum(rate(http_server_requests_seconds_count[5m])))",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 2
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "HTTP Requests Rate (by URI)",
+      "gridPos": {
+        "x": 6,
+        "y": 0,
+        "w": 18,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(http_server_requests_seconds_count[1m])) by (uri)",
+          "legendFormat": "{{uri}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Avg Response Time (seconds)",
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(http_server_requests_seconds_sum[1m])) by (uri) / sum(rate(http_server_requests_seconds_count[1m])) by (uri)",
+          "legendFormat": "{{uri}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "gauge",
+      "title": "JVM Heap Used (MB)",
+      "gridPos": {
+        "x": 12,
+        "y": 8,
+        "w": 6,
+        "h": 6
+      },
+      "targets": [
+        {
+          "expr": "jvm_memory_used_bytes{area=\"heap\"}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "decimals": 2,
+          "min": 0,
+          "max": 2147483648,
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 70 },
+              { "color": "red", "value": 90 }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true
+      }
+    },
+    {
+      "type": "stat",
+      "title": "CPU Usage (%)",
+      "gridPos": {
+        "x": 18,
+        "y": 8,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "expr": "process_cpu_usage * 100",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 2
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "GC Pause Duration (seconds)",
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 12,
+        "h": 6
+      },
+      "targets": [
+        {
+          "expr": "rate(jvm_gc_pause_seconds_sum[5m])",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": []
+  },
+  "editable": true
+}

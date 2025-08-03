@@ -37,3 +37,36 @@ This is an open ended exercise for you to showcase what you know! We encourage y
 
 ### Submitting your coding exercise
 Once you have finished the coding exercise please create a PR into Tekmetric/interview
+
+# Hiking APP
+
+A Spring Boot application for tracking and managing hikes. It can be used as a hiking journal and search engine for trails.
+
+### Prerequisites
+- Maven 3.8+
+- Java 21+
+- Docker
+- Working Internet Connection
+
+### Technology Stack
+- Java 21
+- Spring Boot 3
+- H2 in-memory database for quick dev setup
+- Redis for caching
+- Swagger (OpenAPI 3) for interactive API documentation
+- Prometheus metrics export
+- Grafana dashboards for monitoring
+
+### Build & Run
+
+- `mvn clean build`
+- `docker-compose up --build`
+
+### Accessibility
+- Data visualization (H2 Console): http://localhost:8080/h2-console
+  - username: sa
+  - pass: password
+- Documentation (OpenAPI Swagger): http://localhost:8080/swagger-ui/index.html
+- Monitoring (Grafana): http://localhost:3000/
+  - username: admin
+  - pass: password
