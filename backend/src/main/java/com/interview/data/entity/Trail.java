@@ -48,6 +48,6 @@ public class Trail {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "trail", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trail", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Hike> hikes = new ArrayList<>();
 }

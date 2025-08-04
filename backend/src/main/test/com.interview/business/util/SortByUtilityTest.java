@@ -1,12 +1,13 @@
 package com.interview.business.util;
 
+import com.interview.business.exception.InvalidParameterException;
+import com.interview.business.util.SortByUtility;
 import com.interview.data.entity.Hike;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 
-import java.security.InvalidParameterException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SortByUtilityTest {
 

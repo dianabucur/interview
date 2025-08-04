@@ -59,7 +59,7 @@ A Spring Boot application for tracking and managing hikes. It can be used as a h
 
 ### Build & Run
 
-- `mvn clean build`
+- `mvn clean package`
 - `docker-compose up --build`
 
 ### Accessibility
@@ -69,4 +69,4 @@ A Spring Boot application for tracking and managing hikes. It can be used as a h
 - Documentation (OpenAPI Swagger): http://localhost:8080/swagger-ui/index.html
 - Monitoring (Grafana): http://localhost:3000/
   - username: admin
-  - pass: password
+  - pass: admin

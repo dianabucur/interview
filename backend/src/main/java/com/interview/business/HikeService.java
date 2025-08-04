@@ -54,7 +54,7 @@ public class HikeService {
                     Trail.Fields.location, Trail.Fields.name));
         }
         if (difficulties != null) {
-            specification = specification.and(specificationFactory.filterEqualInJoinFields(difficulties, Hike.Fields.trail, Trail.Fields.difficulty));
+            specification = specification.and(specificationFactory.filterEqualInJoinField(difficulties, Hike.Fields.trail, Trail.Fields.difficulty));
         }
 
         return hikeRepository.findAll(specification, pageable)
@@ -72,11 +72,13 @@ public class HikeService {
                 .orElseGet(() -> hikeMapper.toHikeDto(hike));
     }
 
+    @Transactional
     public HikeDto createHike(UpsertHikeDto hikeDto, User user) {
         Trail trail = trailService.findById(hikeDto.trailId());
         return hikeMapper.toHikeDto(hikeRepository.save(hikeMapper.toHike(hikeDto, trail, user)));
     }
 
+    @Transactional
     public HikeDto updateHike(Long hikeId, UpsertHikeDto hikeDto, User user) {
         Hike hike = hikeRepository.findByIdAndUserId(hikeId, user.getId())
                 .orElseThrow(forEntityWithIdNotFound(Hike.class.getSimpleName(), hikeId));
@@ -90,6 +92,7 @@ public class HikeService {
                 .orElseGet(() -> hikeMapper.toHikeDto(hike));
     }
 
+    @Transactional
     public void deleteHike(Long id, User user) {
         Hike hike = hikeRepository.findByIdAndUserId(id, user.getId())
                 .orElseThrow(forEntityWithIdNotFound(Hike.class.getSimpleName(), id));

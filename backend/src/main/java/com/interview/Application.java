@@ -12,15 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 public class Application {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
-//    public static void main(String[] args) {
-//        String raw = "marypassword";
-//        //String encoded = "$2a$10$9T2zkXlUmkXizFiXyFhdBeM5PIEQIoeLvhCnLtnTw.6qVKhNqoqT2";
-//
-//        var encoder = new BCryptPasswordEncoder();
-//        System.out.println("Matches: " + encoder.encode(raw));
-//    }
 }

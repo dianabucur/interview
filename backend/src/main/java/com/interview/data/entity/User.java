@@ -39,7 +39,7 @@ public class User {
     @Column(name = "name")
     private String displayName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Hike> hikes = new ArrayList<>();
 
 }

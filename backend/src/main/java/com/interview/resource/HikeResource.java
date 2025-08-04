@@ -36,7 +36,7 @@ import java.util.Set;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping(path = "/api/hikelogs", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/hikes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class HikeResource {
 
     private final HikeService hikeService;
@@ -60,8 +60,15 @@ public class HikeResource {
                     description = "Internal Server Error",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))})
     @GetMapping
-    ResponseEntity<Page<HikeListingDto>> getAllHikes(@RequestParam(required = false) String searchText,
+    ResponseEntity<Page<HikeListingDto>> getAllHikes(@Parameter(description = "Free-text search applied to trail name and location")
+                                                     @RequestParam(required = false) String searchText,
                                                      @RequestParam(required = false) Set<TrailDifficulty> difficulties,
+                                                     @Parameter(
+                                                             description = "Sort format: 'fieldName,ASC/DESC'. " +
+                                                                     "Supported fields include: 'date', 'durationHours', 'modifiedOn'. " +
+                                                                     "Defaults to no sorting if not provided.",
+                                                             example = "date,DESC"
+                                                     )
                                                      @RequestParam(required = false) String sortBy,
                                                      @RequestParam(defaultValue = "0") int page,
                                                      @RequestParam(defaultValue = "10") int size) {

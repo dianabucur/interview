@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface HikeRepository extends JpaRepository<Hike, Long>, JpaSpecificationExecutor<Hike> {
 
     @EntityGraph(attributePaths = {"user", "trail"})
-    Optional<Hike> findByIdAndUserId(Long hikeLogId, Long userId);
+    Optional<Hike> findByIdAndUserId(Long hikeId, Long userId);
 
     @EntityGraph(attributePaths = {"user", "trail"})
     Page<Hike> findAll(Specification<Hike> spec, Pageable pageable);

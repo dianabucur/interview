@@ -44,10 +44,18 @@ public class SpecificationFactory<T> {
         };
     }
 
+    /**
+     * Provides a specification to match the given text with values of the given field in join table.
+     *
+     * @param searchValue the text to search for
+     * @param joinField  name of join field
+     * @param fieldName the field to search in
+     * @return the specification, or null if no field name were given or the search text is empty
+     */
     @Nullable
-    public Specification<T> filterEqualInJoinFields(@Nullable Object searchValue,
-                                                    String joinField,
-                                                    @NonNull String fieldName) {
+    public Specification<T> filterEqualInJoinField(@Nullable Object searchValue,
+                                                   String joinField,
+                                                   @NonNull String fieldName) {
         if (searchValue == null) {
             return null;
         }
